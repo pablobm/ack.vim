@@ -9,8 +9,11 @@
 
 " Location of the ack utility
 if !exists("g:ackprg")
-  let s:ackcommand = executable('ack-grep') ? 'ack-grep' : 'ack'
-  let g:ackprg=s:ackcommand." -H --nocolor --nogroup --column"
+  let g:ackcommand = executable('ack-grep') ? 'ack-grep' : 'ack'
+  if !exists("g:ackargs")
+    let g:ackargs = "-H --nocolor --nogroup --column"
+  end
+  let g:ackprg=g:ackcommand." ".g:ackargs
 endif
 
 if !exists("g:ack_apply_qmappings")
